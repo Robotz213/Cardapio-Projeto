@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import usercard from '@/assets/img/usercard.png'
 import { Button, Card } from 'primevue'
 import { useToast } from 'primevue/usetoast'
 import { computed, onMounted, ref } from 'vue'
 import menu1 from './items/menu1.json'
-
 const toast = useToast()
 const items = ref<ItemCardapio[]>(menu1)
 const Cart = ref<ItemCardapio[]>([])
@@ -37,6 +37,9 @@ const addToCart = (item: ItemCardapio) => {
   <div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
       <Card v-for="item in items" :key="item.id">
+        <template #header>
+          <img alt="user header" class="rounded-t-md" :src="usercard" />
+        </template>
         <template #title>
           <span class="font-bold text-lg">{{ item.name }}</span>
         </template>
