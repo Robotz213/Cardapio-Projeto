@@ -1,50 +1,18 @@
 <script setup lang="ts">
+import router from '@/router'
 import { Menubar } from 'primevue'
 import { ref } from 'vue'
+
 const items = ref([
   {
-    label: 'Home',
-    icon: 'pi pi-home',
+    label: 'Cardápio',
+    icon: 'pi pi-shop',
+    command: () => router.push('/cardapio'),
   },
   {
-    label: 'Features',
-    icon: 'pi pi-star',
-  },
-  {
-    label: 'Projects',
-    icon: 'pi pi-search',
-    items: [
-      {
-        label: 'Components',
-        icon: 'pi pi-bolt',
-      },
-      {
-        label: 'Blocks',
-        icon: 'pi pi-server',
-      },
-      {
-        label: 'UI Kit',
-        icon: 'pi pi-pencil',
-      },
-      {
-        label: 'Templates',
-        icon: 'pi pi-palette',
-        items: [
-          {
-            label: 'Apollo',
-            icon: 'pi pi-palette',
-          },
-          {
-            label: 'Ultima',
-            icon: 'pi pi-palette',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    label: 'Contact',
-    icon: 'pi pi-envelope',
+    label: 'Carrinho',
+    icon: 'pi pi-shopping-cart',
+    command: () => router.push('/cart'),
   },
 ])
 </script>
