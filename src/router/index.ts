@@ -13,6 +13,16 @@ const router = createRouter({
       name: 'cardapio',
       component: () => import('../views/cardapio/CardapioView.vue'),
     },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: () => import('../views/cart/CartView.vue'),
+    },
+    {
+      path: '/payment',
+      name: 'payment',
+      component: () => import('../views/payment/PaymentView.vue'),
+    },
   ],
 })
 

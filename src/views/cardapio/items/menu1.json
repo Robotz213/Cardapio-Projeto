@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Pizza Margherita",
+        "description": "Molho de tomate, mussarela e manjericão",
+        "price": "R$ 35,00"
+    },
+    {
+        "id": 2,
+        "name": "Hambúrguer Artesanal",
+        "description": "Carne 180g, queijo, salada e molho especial",
+        "price": "R$ 28,00"
+    },
+    {
+        "id": 3,
+        "name": "Salada Caesar",
+        "description": "Alface, frango grelhado, croutons e molho Caesar",
+        "price": "R$ 22,00"
+    },
+    {
+        "id": 4,
+        "name": "Suco Natural",
+        "description": "Laranja, limão ou abacaxi",
+        "price": "R$ 8,00"
+    }
+]

@@ -1,53 +1,97 @@
 <script setup lang="ts">
 import { Button, Card } from 'primevue'
-import { ref } from 'vue'
-const items = ref([
-  {
-    id: 1,
-    name: 'Pizza Margherita',
-    description: 'Molho de tomate, mussarela e manjericão',
-    price: 'R$ 35,00',
-  },
-  {
-    id: 2,
-    name: 'Hambúrguer Artesanal',
-    description: 'Carne 180g, queijo, salada e molho especial',
-    price: 'R$ 28,00',
-  },
-  {
-    id: 3,
-    name: 'Salada Caesar',
-    description: 'Alface, frango grelhado, croutons e molho Caesar',
-    price: 'R$ 22,00',
-  },
-  { id: 4, name: 'Suco Natural', description: 'Laranja, limão ou abacaxi', price: 'R$ 8,00' },
-])
+import { useToast } from 'primevue/usetoast'
+import { computed, onMounted, ref } from 'vue'
+import menu1 from './items/menu1.json'
 
-const addToCart = (item: (typeof items.value)[0]) => {
-  const cart = JSON.parse(sessionStorage.getItem('cart') || '[]')
+const toast = useToast()
+const items = ref<ItemCardapio[]>(menu1)
+const Cart = ref<ItemCardapio[]>([])
+const cart = computed(() => Cart.value.length > 0)
+
+onMounted(() => {
+  const cart: ItemCardapio[] = JSON.parse(sessionStorage.getItem('cart') || '[]')
+
+  if (cart.length > 0) {
+    Cart.value.push(...cart)
+  }
+})
+
+const addToCart = (item: ItemCardapio) => {
+  const cart: ItemCardapio[] = JSON.parse(sessionStorage.getItem('cart') || '[]')
   cart.push(item)
   sessionStorage.setItem('cart', JSON.stringify(cart))
+
+  toast.add({
+    severity: 'success',
+    summary: 'Sucesso',
+    detail: `${item.name} adicionado ao carrinho!`,
+    life: 3000,
+  })
+
+  Cart.value.push(item)
 }
 </script>
 
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-    <Card v-for="item in items" :key="item.id" class="shadow-lg rounded-lg border border-gray-200">
-      <template #title>
-        <span class="font-bold text-lg">{{ item.name }}</span>
-      </template>
-      <template #content>
-        <p class="text-gray-600 mb-2">{{ item.description }}</p>
-        <span class="text-green-600 font-semibold">{{ item.price }}</span>
-      </template>
-      <template #footer>
+  <div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+      <Card v-for="item in items" :key="item.id">
+        <template #title>
+          <span class="font-bold text-lg">{{ item.name }}</span>
+        </template>
+        <template #content>
+          <p class="text-gray-600 mb-2">{{ item.description }}</p>
+          <span class="text-green-600 font-semibold">{{ item.price }}</span>
+        </template>
+        <template #footer>
+          <Button
+            class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            @click="addToCart(item)"
+          >
+            Adicionar ao Carrinho
+          </Button>
+        </template>
+      </Card>
+    </div>
+
+    <Transition name="cart">
+      <div class="cart" v-if="cart">
         <Button
-          class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-          @click="addToCart(item)"
+          icon="pi pi-shopping-cart"
+          class="cart-button"
+          @click="$router.push('/cart')"
+          badgeClass="p-badge-danger"
         >
-          Adicionar ao Carrinho
+          Ir para o carrinho ({{ Cart.length }})
         </Button>
-      </template>
-    </Card>
+      </div>
+    </Transition>
   </div>
 </template>
+
+<style lang="css" scoped>
+.cart {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  padding-bottom: 1.2rem;
+}
+
+.cart .cart-button {
+  width: 100%;
+  height: 5rem;
+}
+
+.cart-enter-active,
+.cart-leave-active {
+  transition: all 0.5s ease;
+}
+
+.cart-enter-from,
+.cart-leave-to {
+  transform: translateY(90px);
+}
+</style>
