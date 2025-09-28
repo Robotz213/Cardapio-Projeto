@@ -1,63 +1,53 @@
 <script setup lang="ts">
-import Card from 'primevue/card'
+import { Button, Card } from 'primevue'
+import { ref } from 'vue'
+const items = ref([
+  {
+    id: 1,
+    name: 'Pizza Margherita',
+    description: 'Molho de tomate, mussarela e manjericão',
+    price: 'R$ 35,00',
+  },
+  {
+    id: 2,
+    name: 'Hambúrguer Artesanal',
+    description: 'Carne 180g, queijo, salada e molho especial',
+    price: 'R$ 28,00',
+  },
+  {
+    id: 3,
+    name: 'Salada Caesar',
+    description: 'Alface, frango grelhado, croutons e molho Caesar',
+    price: 'R$ 22,00',
+  },
+  { id: 4, name: 'Suco Natural', description: 'Laranja, limão ou abacaxi', price: 'R$ 8,00' },
+])
 
-import BebidasFlex from '@/assets/json/cardapio/bebidas-delicados.json'
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const _bkp = ' '
+const addToCart = (item: (typeof items.value)[0]) => {
+  const cart = JSON.parse(sessionStorage.getItem('cart') || '[]')
+  cart.push(item)
+  sessionStorage.setItem('cart', JSON.stringify(cart))
+}
 </script>
 
 <template>
-  <div class="cardapio-content">
-    <Card class="card-delicados">
-      <template #header>
-        <h1 style="padding-left: 50px; padding-right: 50px; font-weight: bold; font-size: 2.5rem">
-          Rapazes e Moças Delicados
-        </h1>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+    <Card v-for="item in items" :key="item.id" class="shadow-lg rounded-lg border border-gray-200">
+      <template #title>
+        <span class="font-bold text-lg">{{ item.name }}</span>
       </template>
       <template #content>
-        <div class="p-10 grid grid-cols-12 gap-2">
-          <div class="col-span-12 grid grid-cols-12 gap-2">
-            <div
-              v-for="(Bebida, index) in BebidasFlex"
-              :key="index"
-              class="col-span-12 lg:col-span-6 xl:col-span-3"
-            >
-              <Card>
-                <template #content>
-                  <div class="flex justify-between mb-4">
-                    <div>
-                      <span class="block text-muted-color font-medium mb-4">{{ Bebida.nome }}</span>
-                      <div class="font-medium text-xl">{{ Bebida.preco }}</div>
-                    </div>
-                    <div
-                      class="flex items-center justify-center bg-blue-100 dark:bg-blue-400/10 rounded-border"
-                      style="width: 2.5rem; height: 2.5rem"
-                    >
-                      <i class="pi pi-shopping-cart text-blue-500 !text-xl"></i>
-                    </div>
-                  </div>
-                  <span class="text-primary font-medium">24 new </span>
-                  <span class="text-muted-color">since last visit</span>
-                </template>
-              </Card>
-            </div>
-          </div>
-        </div>
+        <p class="text-gray-600 mb-2">{{ item.description }}</p>
+        <span class="text-green-600 font-semibold">{{ item.price }}</span>
+      </template>
+      <template #footer>
+        <Button
+          class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          @click="addToCart(item)"
+        >
+          Adicionar ao Carrinho
+        </Button>
       </template>
     </Card>
   </div>
 </template>
-<style lang="css" scoped>
-.cardapio-content {
-  margin-top: 5rem;
-
-  display: flex;
-  justify-content: center;
-}
-
-.card-delicados {
-  width: 20.5rem;
-  margin: 1.4rem;
-}
-</style>
