@@ -46,7 +46,7 @@ const totalPriceFormatted = computed(() => `R$ ${totalPrice.value.toFixed(2)}`)
 </script>
 
 <template>
-  <div class="container mx-auto py-8">
+  <div class="p-12">
     <h1 class="text-2xl font-bold mb-6">Carrinho de Compras</h1>
 
     <TransitionGroup
