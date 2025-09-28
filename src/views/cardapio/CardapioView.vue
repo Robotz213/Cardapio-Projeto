@@ -60,7 +60,7 @@ const addToCart = (item: ItemCardapio) => {
         <Button
           icon="pi pi-shopping-cart"
           class="cart-button"
-          @click="$router.push('/cart')"
+          @click="$router.push('/carrinho')"
           badgeClass="p-badge-danger"
         >
           Ir para o carrinho ({{ Cart.length }})

@@ -12,7 +12,7 @@ const items = ref([
   {
     label: 'Carrinho',
     icon: 'pi pi-shopping-cart',
-    command: () => router.push('/cart'),
+    command: () => router.push('/carrinho'),
   },
 ])
 </script>

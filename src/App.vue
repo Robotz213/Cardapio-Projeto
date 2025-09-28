@@ -20,6 +20,7 @@ import NavbarView from './components/NavbarView.vue'
   justify-content: center;
   flex-direction: column;
   display: flex;
+  margin-bottom: 5.7rem;
 }
 
 .fade-enter-active,

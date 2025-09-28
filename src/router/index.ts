@@ -11,17 +11,17 @@ const router = createRouter({
     {
       path: '/cardapio',
       name: 'cardapio',
-      component: () => import('../views/cardapio/CardapioView.vue'),
+      component: () => import('@/views/cardapio/CardapioView.vue'),
     },
     {
-      path: '/cart',
-      name: 'cart',
-      component: () => import('../views/cart/CartView.vue'),
+      path: '/carrinho',
+      name: 'carrinho',
+      component: () => import('@/views/cart/CartView.vue'),
     },
     {
-      path: '/payment',
-      name: 'payment',
-      component: () => import('../views/payment/PaymentView.vue'),
+      path: '/checkout',
+      name: 'checkout',
+      component: () => import('@/views/checkout/CheckoutView.vue'),
     },
   ],
 })
