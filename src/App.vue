@@ -12,6 +12,7 @@ import NavbarView from './components/NavbarView.vue'
 .content {
   margin-top: 2.3rem;
   justify-content: center;
+  flex-direction: column;
   display: flex;
 }
 </style>
