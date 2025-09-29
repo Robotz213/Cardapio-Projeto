@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import usercard from '@/assets/img/usercard.png'
 import { Button, Card } from 'primevue'
 import { useToast } from 'primevue/usetoast'
 import { computed, onMounted, ref } from 'vue'
 import menu1 from './items/menu1.json'
+
 const toast = useToast()
 const items = ref<ItemCardapio[]>(menu1)
 const Cart = ref<ItemCardapio[]>([])
@@ -16,6 +16,15 @@ onMounted(() => {
     Cart.value.push(...cart)
   }
 })
+
+const images = {
+  heineken: import('@/assets/img/heineken.png'),
+  skol: import('@/assets/img/skol.png'),
+  budweiser: import('@/assets/img/budweiser.png'),
+  brahma: import('@/assets/img/brahma.png'),
+  antarctica: import('@/assets/img/antarctica.png'),
+  skarloff: import('@/assets/img/skarloff.png'),
+}
 
 const addToCart = (item: ItemCardapio) => {
   const cart: ItemCardapio[] = JSON.parse(sessionStorage.getItem('cart') || '[]')
@@ -34,11 +43,12 @@ const addToCart = (item: ItemCardapio) => {
 </script>
 
 <template>
-  <div>
+  <div class="cardapio-content">
+    <h1 class="text-4xl font-bold mb-6">Cardápio</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
       <Card v-for="item in items" :key="item.id">
         <template #header>
-          <img alt="user header" class="rounded-t-md" :src="usercard" />
+          <img alt="user header" class="rounded-t-md" :src="heineken" />
         </template>
         <template #title>
           <span class="font-bold text-lg">{{ item.name }}</span>
@@ -74,6 +84,11 @@ const addToCart = (item: ItemCardapio) => {
 </template>
 
 <style lang="css" scoped>
+.cardapio-content {
+  margin-bottom: 5rem;
+  padding: 2.3rem;
+}
+
 .cart {
   position: fixed;
   width: 100%;
