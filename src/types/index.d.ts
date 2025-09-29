@@ -4,4 +4,5 @@ type ItemCardapio = {
   description: string
   price: string | number
   quantity?: number
+  imageName: string
 }

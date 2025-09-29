@@ -1,26 +1,58 @@
 [
     {
         "id": 1,
-        "name": "Pizza Margherita",
-        "description": "Molho de tomate, mussarela e manjericão",
-        "price": "R$ 35,00"
+        "name": "Skol Beats 330ml",
+        "description": "Cerveja Skol Beats 330ml",
+        "price": "R$ 35,00",
+        "imageName": "skol_beats"
     },
     {
         "id": 2,
-        "name": "Hambúrguer Artesanal",
-        "description": "Carne 180g, queijo, salada e molho especial",
-        "price": "R$ 28,00"
+        "name": "Heineken 330ml",
+        "description": "Cerveja Heineken 330ml",
+        "price": "R$ 35,00",
+        "imageName": "heineken"
     },
     {
         "id": 3,
-        "name": "Salada Caesar",
-        "description": "Alface, frango grelhado, croutons e molho Caesar",
-        "price": "R$ 22,00"
+        "name": "Budweiser 350ml",
+        "description": "Cerveja Budweiser 350ml",
+        "price": "R$ 35,00",
+        "imageName": "budweiser"
     },
     {
         "id": 4,
-        "name": "Suco Natural",
-        "description": "Laranja, limão ou abacaxi",
-        "price": "R$ 8,00"
+        "name": "Skarloff Ice 350ml",
+        "description": "Skarloff Ice 350ml",
+        "price": "R$ 35,00",
+        "imageName": "skarloff_ice"
+    },
+    {
+        "id": 5,
+        "name": "Bohemia 600ml",
+        "description": "Cerveja Bohemia 600ml",
+        "price": "R$ 30,00",
+        "imageName": "bohemia"
+    },
+    {
+        "id": 6,
+        "name": "Brahma 600ml",
+        "description": "Cerveja Brahma 600ml",
+        "price": "R$ 30,00",
+        "imageName": "brahma"
+    },
+    {
+        "id": 7,
+        "name": "Antarctica 600ml",
+        "description": "Cerveja Antarctica 600ml",
+        "price": "R$ 30,00",
+        "imageName": "antarctica"
+    },
+    {
+        "id": 8,
+        "name": "Skol 600ml",
+        "description": "Cerveja Skol 600ml",
+        "price": "R$ 30,00",
+        "imageName": "skol"
     }
 ]

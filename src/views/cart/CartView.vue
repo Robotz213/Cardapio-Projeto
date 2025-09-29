@@ -1,7 +1,29 @@
 <script setup lang="ts">
-import usercard from '@/assets/img/usercard.png'
+import Antarctica from '@/assets/img/antarctica.png'
+import Bohemia from '@/assets/img/bohemia.png'
+import Brahma from '@/assets/img/brahma.png'
+import Budweiser from '@/assets/img/budweiser.png'
+import Heineken from '@/assets/img/heineken.png'
+import Skarloff_Ice from '@/assets/img/skarloff_ice.png'
+import SkolBeats from '@/assets/img/skol-beats.png'
+import Skol from '@/assets/img/skol.png'
 import { Button, Card } from 'primevue'
 import { computed, onBeforeMount, ref } from 'vue'
+const images = {
+  heineken: Heineken,
+  skol: Skol,
+  budweiser: Budweiser,
+  brahma: Brahma,
+  antarctica: Antarctica,
+  skarloff_ice: Skarloff_Ice,
+  skol_beats: SkolBeats,
+  bohemia: Bohemia,
+}
+
+function getImage(item: ItemCardapio) {
+  return images[item.imageName as keyof typeof images]
+}
+
 const cartItems = ref<ItemCardapio[]>([])
 onBeforeMount(() => {
   const cartRaw = JSON.parse(sessionStorage.getItem('cart') || '[]')
@@ -60,7 +82,7 @@ const totalPriceFormatted = computed(() => `R$ ${totalPrice.value.toFixed(2)}`)
       >
         <Card v-for="item in items" :key="item.id">
           <template #header>
-            <img alt="user header" class="rounded-t-md" :src="usercard" />
+            <img alt="user header" class="rounded-t-md imagem_cardapio" :src="getImage(item)" />
           </template>
           <template #title>
             <span class="font-bold text-lg">{{ item.name }}</span>
@@ -158,5 +180,11 @@ const totalPriceFormatted = computed(() => `R$ ${totalPrice.value.toFixed(2)}`)
 .checkout-enter-from,
 .checkout-leave-to {
   transform: translateY(120px);
+}
+
+.imagem_cardapio {
+  width: 100%;
+  height: 226px;
+  object-fit: scale-down;
 }
 </style>

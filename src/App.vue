@@ -5,16 +5,16 @@ import NavbarView from './components/NavbarView.vue'
 </script>
 
 <template>
-  <Toast />
   <NavbarView />
   <RouterView class="content" v-slot="{ Component }">
     <Transition name="fade" mode="out-in">
       <component :is="Component"></component>
     </Transition>
   </RouterView>
+  <Toast style="width: 17.5rem" />
 </template>
 
-<style scoped>
+<style lang="css" scoped>
 .content {
   margin-top: 5.3rem;
   justify-content: center;

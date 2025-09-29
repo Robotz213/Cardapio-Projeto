@@ -1,4 +1,12 @@
 <script setup lang="ts">
+import Antarctica from '@/assets/img/antarctica.png'
+import Bohemia from '@/assets/img/bohemia.png'
+import Brahma from '@/assets/img/brahma.png'
+import Budweiser from '@/assets/img/budweiser.png'
+import Heineken from '@/assets/img/heineken.png'
+import Skarloff_Ice from '@/assets/img/skarloff_ice.png'
+import SkolBeats from '@/assets/img/skol-beats.png'
+import Skol from '@/assets/img/skol.png'
 import { Button, Card } from 'primevue'
 import { useToast } from 'primevue/usetoast'
 import { computed, onMounted, ref } from 'vue'
@@ -8,6 +16,16 @@ const toast = useToast()
 const items = ref<ItemCardapio[]>(menu1)
 const Cart = ref<ItemCardapio[]>([])
 const cart = computed(() => Cart.value.length > 0)
+const images = {
+  heineken: Heineken,
+  skol: Skol,
+  budweiser: Budweiser,
+  brahma: Brahma,
+  antarctica: Antarctica,
+  skarloff_ice: Skarloff_Ice,
+  skol_beats: SkolBeats,
+  bohemia: Bohemia,
+}
 
 onMounted(() => {
   const cart: ItemCardapio[] = JSON.parse(sessionStorage.getItem('cart') || '[]')
@@ -16,15 +34,6 @@ onMounted(() => {
     Cart.value.push(...cart)
   }
 })
-
-const images = {
-  heineken: import('@/assets/img/heineken.png'),
-  skol: import('@/assets/img/skol.png'),
-  budweiser: import('@/assets/img/budweiser.png'),
-  brahma: import('@/assets/img/brahma.png'),
-  antarctica: import('@/assets/img/antarctica.png'),
-  skarloff: import('@/assets/img/skarloff.png'),
-}
 
 const addToCart = (item: ItemCardapio) => {
   const cart: ItemCardapio[] = JSON.parse(sessionStorage.getItem('cart') || '[]')
@@ -40,6 +49,10 @@ const addToCart = (item: ItemCardapio) => {
 
   Cart.value.push(item)
 }
+
+function getImage(item: ItemCardapio) {
+  return images[item.imageName as keyof typeof images]
+}
 </script>
 
 <template>
@@ -48,7 +61,11 @@ const addToCart = (item: ItemCardapio) => {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
       <Card v-for="item in items" :key="item.id">
         <template #header>
-          <img alt="user header" class="rounded-t-md" :src="heineken" />
+          <img
+            alt="Imagem item cardápio"
+            class="rounded-t-md imagem_cardapio"
+            :src="getImage(item)"
+          />
         </template>
         <template #title>
           <span class="font-bold text-lg">{{ item.name }}</span>
@@ -87,6 +104,9 @@ const addToCart = (item: ItemCardapio) => {
 .cardapio-content {
   margin-bottom: 5rem;
   padding: 2.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .cart {
@@ -95,7 +115,7 @@ const addToCart = (item: ItemCardapio) => {
   bottom: 0;
   padding-left: 5rem;
   padding-right: 5rem;
-  padding-bottom: 1.2rem;
+  padding-bottom: 2rem;
 }
 
 .cart .cart-button {
@@ -111,5 +131,11 @@ const addToCart = (item: ItemCardapio) => {
 .cart-enter-from,
 .cart-leave-to {
   transform: translateY(90px);
+}
+
+.imagem_cardapio {
+  width: 100%;
+  height: 226px;
+  object-fit: scale-down;
 }
 </style>
